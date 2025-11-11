@@ -11,5 +11,10 @@ public class CreateNewCategory {
 	{
 		
 	}
+	
+	public void t3()
+	{
+		
+	}
 
 }
