@@ -15,12 +15,13 @@
  * - ITestResult gives the test result/info, ExtentTest records it in the report.
  * 
  * ✅ Diagram to clarify : 
- * 
- * ┌────────────────────┐       ┌───────────────────────┐
+  
+   
+   ┌────────────────────┐       ┌───────────────────────┐
    │ TestNG (runs test) │       │  ExtentReports (HTML) │
    └─────────┬──────────┘       └─────────┬─────────────┘
              │                            │
-        ITestResult  ─────────▶       ExtentTest
+        ITestResult  ─────────        ExtentTest
              │ (gives info)               │ (logs info)
              │                            │
   name, status, exception     pass(), fail(), attach screenshot

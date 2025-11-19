@@ -18,7 +18,7 @@
  *  2. FileReader automatically converts bytes → characters internally, which is missing in FileInputSteam, need to do manually.
  *  3. JSON parsers (JsonParser etc.) expect a Reader (like FileReader) rather than raw InputStream.
  * 
- *  ❓ So why not FileInputStream?
+ *  ✅ So why not FileInputStream?
  *  
  *  -> You can use it, but then you must convert bytes to characters manually:
  *  
