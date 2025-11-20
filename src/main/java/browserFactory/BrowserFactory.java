@@ -1,12 +1,20 @@
 package browserFactory;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.time.Duration;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
+
+import dataProvider.ConfigReader;
+import helper.ResourceUtils;
 
 public class BrowserFactory {
 	
@@ -21,7 +29,34 @@ public class BrowserFactory {
 	{		
 		if(browserName.equals("Chrome") || browserName.equals("GC") || browserName.equals("Google Chrome"))
 		{
-			driver=new ChromeDriver();
+			if(Boolean.parseBoolean(ConfigReader.getProperty("remote.execution.flag")))
+			{
+				try
+				{
+					DesiredCapabilities cap = new DesiredCapabilities();
+					
+					cap.setBrowserName("Chrome");
+						
+					ChromeOptions opt = new ChromeOptions();
+					
+					opt.addArguments("--no-sandbox");
+					opt.setAcceptInsecureCerts(true);
+					opt.addArguments("--ignore-certificate-errors", "--allow-insecure-localhost");	
+					
+					cap.merge(opt);
+					
+					String remoteURL = ResourceUtils.getRemoteURL();
+					driver=new RemoteWebDriver(new URL(remoteURL), cap);
+				} 
+				catch (MalformedURLException e)
+				{
+					System.out.println("URL is malformed "+e.getMessage());
+				}
+			}
+			else
+			{
+				driver=new ChromeDriver();
+			}
 		}
 		else if(browserName.equals("Firefox") || browserName.equals("FF") || browserName.equals("Mozila FireFox"))
 		{

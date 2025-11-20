@@ -6,13 +6,14 @@
   </listeners>
   <test thread-count="5" name="Test(failed)">
     <classes>
-      <class name="testcases.LoginTest">
+      <class name="testcases.RemoteDriver">
         <methods>
-          <include name="loginToApplication" invocation-numbers="1"/>
+          <include name="RemoteDriverTest"/>
           <include name="setupBrowser"/>
+          <include name="setupDB"/>
           <include name="closeBrowser"/>
         </methods>
-      </class> <!-- testcases.LoginTest -->
+      </class> <!-- testcases.RemoteDriver -->
     </classes>
   </test> <!-- Test(failed) -->
 </suite> <!-- Failed suite [Suite] -->
