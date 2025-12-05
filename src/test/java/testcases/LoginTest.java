@@ -16,7 +16,8 @@ import pages.LoginPage;
 
 public class LoginTest extends BaseClass {
 	
-	@Test(dataProvider = "loginDetails",dataProviderClass = CustomDataProvider.class)
+	//groups = {"smoke", "regression"}	
+	@Test(groups ="smoke",dataProvider = "loginDetails",dataProviderClass = CustomDataProvider.class)
 	public void loginToApplication(String uname,String pass)
 	{
 		LoginPage login=new LoginPage(driver);

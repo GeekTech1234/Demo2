@@ -98,6 +98,7 @@ import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.MediaEntityBuilder;
 
+import base.BaseClass;
 import browserFactory.BrowserFactory;
 import helper.Utility;
 
@@ -119,15 +120,43 @@ public class ExtentTestNGITestListener implements ITestListener{
 	{
 	   parentTest.get().pass("Test passed");
 	}
-	
+/*	
 	public void onTestFailure(ITestResult result)
 	{
 	   WebDriver driver = BrowserFactory.getBrowserInstance();
+	   System.out.println("Driver in listener = " + driver);
 	   String base64 = Utility.captureVisibleViewportScreenshotInBase64(driver);
 	   parentTest.get().fail("Test Failed "+result.getMethod().getMethodName());
 	   parentTest.get().fail(result.getThrowable().getMessage(),MediaEntityBuilder.createScreenCaptureFromBase64String(base64,"My Screenshot").build());
 	}
-
+*/	
+	
+	public void onTestFailure(ITestResult result)
+	{
+		WebDriver driver=null;
+		Object testObject = result.getInstance();
+			
+		if(testObject instanceof BaseClass)
+		{
+		    driver  = ((BaseClass)testObject).driver;
+		}
+		
+		System.out.println("Driver in listener = " + driver);
+		
+		 // Prevent listener crash
+	    if (driver == null) {
+	        parentTest.get().fail("Driver is null. Screenshot skipped.");
+	        parentTest.get().fail(result.getThrowable());
+	        return;
+	    }
+		
+		String base64 = Utility.captureVisibleViewportScreenshotInBase64(driver);
+		parentTest.get().fail("Test Failed "+result.getMethod().getMethodName());
+		parentTest.get().fail(result.getThrowable().getMessage(),MediaEntityBuilder.createScreenCaptureFromBase64String(base64,"My Screenshot").build());
+	}
+	
+	
+	
 	public void onTestSkipped(ITestResult result)
 	{
 	    parentTest.get().skip("Test Skipped "+result.getThrowable().getMessage());

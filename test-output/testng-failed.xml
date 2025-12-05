@@ -5,15 +5,17 @@
     <listener class-name="listeners.ExtentTestNGITestListener"/>
   </listeners>
   <test thread-count="5" name="Test(failed)">
+    <groups>
+      <run>
+        <include name="smoke"/>
+      </run>
+    </groups>
     <classes>
-      <class name="testcases.RemoteDriver">
+      <class name="testcases.LoginTest">
         <methods>
-          <include name="RemoteDriverTest"/>
-          <include name="setupBrowser"/>
-          <include name="setupDB"/>
-          <include name="closeBrowser"/>
+          <include name="loginToApplication" invocation-numbers="0 1"/>
         </methods>
-      </class> <!-- testcases.RemoteDriver -->
+      </class> <!-- testcases.LoginTest -->
     </classes>
   </test> <!-- Test(failed) -->
 </suite> <!-- Failed suite [Suite] -->
