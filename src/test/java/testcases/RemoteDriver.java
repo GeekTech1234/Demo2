@@ -22,6 +22,7 @@ public class RemoteDriver extends BaseClass{
 	DesiredCapabilities cap = new DesiredCapabilities();
 	
 	cap.setBrowserName("Chrome");
+		// cap.setBrowserName("Chrome");
 		
 	ChromeOptions opt = new ChromeOptions();
 	
