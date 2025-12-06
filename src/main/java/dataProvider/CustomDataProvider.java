@@ -18,10 +18,17 @@ public class CustomDataProvider {
 		return arr;
 	}
 	
-	@DataProvider(name="UserDataSet")
-	public static Object[][] getUserData()
+	@DataProvider(name="UserItemsDataSet")
+	public static Object[][] getUserData1()
 	{
-		Object[][] arr= JSONDataReader.readJSONData();
+		Object[][] arr= JSONDataReader.readJSONData1();
+		return arr;
+	}
+	
+	@DataProvider(name="UsersLoginDataSet")
+	public static Object[][] getUserData2()
+	{
+		Object[][] arr= JSONDataReader.readJSONData2();
 		return arr;
 	}
 }
